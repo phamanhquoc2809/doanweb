@@ -1,3 +1,8 @@
+<?php
+    include("config/conn.php");
+    $sql_lietke_danhmucsp = "SELECT * FROM dmsanpham ";
+    $query_lietke_danhmucsp = mysqli_query($con,$sql_lietke_danhmucsp);
+?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -67,18 +72,22 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $arrTenSanPham = array("Asus","Lenovo","Dell");
-                                        for($i = 0;$i < count($arrTenSanPham);$i++){
-                                        echo '<tr>';
-                                        echo '   <td class="serial">'.($i+1).'.</td>';
-                                        echo '  <td class="avatar">'.$arrTenSanPham[$i].'</td>';
-                                        echo '   <td>';
-                                        echo '   <button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> Xóa</button>';
-                                        echo '   <a href="chitietDMSP.php"><button type="button" class="btn btn-success"><i class="fa fa-edit"></i> Sửa</button></a>';
-                                        echo '    </td>';
-                                        echo '</tr>';
+                                        $i =0;
+                                        while ($row = mysqli_fetch_array($query_lietke_danhmucsp)){
+                                            $i++;
+                                        ?>
+                                        <tr>
+                                        <td><?php echo $i ?></td>
+                                        <td><?php echo $row['tendm'] ?></td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> Xóa</button>
+                                            <a href="chitietDMSP.php"><button type="button" class="btn btn-success"><i class="fa fa-edit"></i> Sửa</button></a>
+                                        </td>
+                                        </tr>
+                                        <?php
                                         }
                                         ?>
+                                        
                                     </tbody>
                                 </table>
                             </div> <!-- /.table-stats -->
